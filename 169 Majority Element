@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int majorityElement(int* nums, int numsSize) {
+    int max = nums[0], min = nums[0];
+
+    // Find min and max to size the frequency array
+    for (int i = 1; i < numsSize; i++) {
+        if (nums[i] > max) max = nums[i];
+        if (nums[i] < min) min = nums[i];
+    }
+
+    int range = max - min + 1;
+    int* freq = (int*)calloc(range, sizeof(int));
+
+    for (int i = 0; i < numsSize; i++) {
+        freq[nums[i] - min]++;
+        if (freq[nums[i] - min] > numsSize / 2) {
+            int result = nums[i];
+            free(freq);
+            return result;
+        }
+    }
+
+    free(freq);
+    return -1; // Should never reach here if majority element is guaranteed
+}
