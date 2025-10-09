@@ -1,0 +1,22 @@
+int findMaxLength(int* nums, int numsSize) {
+    int mapSize = 2 * numsSize + 1;
+    int* map = (int*)malloc(sizeof(int) * mapSize);
+    for (int i = 0; i < mapSize; ++i) map[i] = -2;
+
+    int maxLen = 0, count = 0;
+    map[numsSize] = -1;  // offset to handle negative indices
+
+    for (int i = 0; i < numsSize; ++i) {
+        count += (nums[i] == 1) ? 1 : -1;
+        int index = count + numsSize;
+
+        if (map[index] >= -1) {
+            maxLen = (i - map[index] > maxLen) ? i - map[index] : maxLen;
+        } else {
+            map[index] = i;
+        }
+    }
+
+    free(map);
+    return maxLen;
+}
