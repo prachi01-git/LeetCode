@@ -1,0 +1,19 @@
+class Solution {
+public:
+    bool areOccurrencesEqual(string s) {
+        unordered_map<char, int> mpp;
+
+        for(int i=0 ; i<s.length() ; i++){
+            mpp[s[i]]++;
+        }
+        int target = mpp[s[0]];
+        for (int i=1 ; i<s.length() ; i++){
+            char current_char = s[i];
+
+            if(mpp[current_char] != target ){
+            return false;
+            }
+        }
+        return true;
+     }
+};
