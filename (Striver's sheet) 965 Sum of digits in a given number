@@ -1,0 +1,17 @@
+class Solution{
+public:
+    int sumDigits(int num){
+         if(num == 0) return 0;
+
+         return (num%10) + sumDigits(num/10);
+    }
+	int addDigits(int num){
+		//your code goes here
+        if(num < 10) return num;
+
+        int currentSum = sumDigits(num);
+
+        return addDigits(currentSum);
+        
+        }
+};
